@@ -1,0 +1,68 @@
+
+
+# CSV Program Python 3.9
+# Edited by Stonebrucken / Arvens
+
+import csv
+import math
+
+def addtofile():
+    file = open("Salaries.csv","a")
+    name = input("Enter your name: ")
+    passcode = input("Enter your passcode: ")
+    lisence = input("Enter the protecting lisence associated with your claim")
+    crypto = input("Do you hold any crypto earnings? e.g. bitcoin: ")
+    salary = int(input("Enter your monthly salary: "))
+    annualsalary =  salary * 12
+    print(annualsalary, "Is your annual salary") # User appended info
+    
+    newrecord = str(name) + str(salary) + str(annualsalary) + str(passcode) + str(lisence) + str(crypto) + "\n"
+    
+    file.write(str(newrecord))
+    file.close() # This will be able to add or modify a file 
+
+def viewpersonalrecord():
+
+    file = open("Salaries.csv","r")
+    for row1 in file:
+        print(row1)
+    file.close() # This will be able to view a saved file, for e.g. you had 7000 as a monthly salary which willl be viewed by this function.
+
+def deletepersonalrecord():
+
+    file = open("Salaries.csv","r")
+    x = 0
+    tmplist = []
+    for row in file:
+        tmplist.append(row)
+    file.close()
+    for row in tmplist:
+        print(x, row)
+        x = x + 1
+    rowtobedeleted = int(input("Enter which number row you want to delete: "))
+    del tmplist[rowtobedeleted] 
+    file = open("Salaries.csv","w")
+    
+    for row in tmplist:
+        file.write(row)
+    file.close() # You are able to delete a row with this file, this hypothetically stacks each saved folder as 'x' which is added on by 1 each time a new save file appears. In this case,  you will be able to delete any integer stored from 1 to any stored file which is a variable to x.
+
+tryagain = True
+while tryagain == True:
+    print("1. Add to your file")
+    print("2. View all personal records")
+    print("3. Delete a personal record")
+    print("4. Shut Down Program")
+    print()
+    selection = int(input("Enter a number from 1 - 4 to pick your selection: "))
+    if selection == 1:
+        addtofile()
+    elif selection == 2:
+        viewpersonalrecord()
+    elif selection == 3:
+        deletepersonalrecord()
+    elif selection == 4:
+        tryagain = False
+    else:
+       print("Invalid option") # Check to see if all conditions are met
+
